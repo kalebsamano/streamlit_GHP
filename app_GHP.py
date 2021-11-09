@@ -248,12 +248,3 @@ fig.update_layout(
         )
 # display
 st.plotly_chart(fig)
-
-
-
-
-
-
-
-
-

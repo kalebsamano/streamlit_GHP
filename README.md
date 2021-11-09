@@ -7,10 +7,11 @@
 Create virtual environment using pipenv: https://www.datacamp.com/community/tutorials/virtual-environment-in-python
 pipenv shell
 
-Libraries / packages needed are pep 517, numpy, pandas, plotly and streamlit. Install them with the following commands:
-pip install p5py
-pipenv install PEP517
-pipenv install numpy
+IMPORTANT: 
+1- If environment is created using Python 3.9, change the version in Pipfile and Pipfile.lock manually to Python 3.8.9
+2- Make sure to install streamlit to your local path (pip install streamlit), problems arose with the streamlit installation in the project virtual environment before doing so
+
+Libraries / packages needed are pandas, plotly and streamlit. Install them with the following commands:
 pipenv install pandas
 pipenv install plotly
 pipenv install streamlit

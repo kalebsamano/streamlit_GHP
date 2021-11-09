@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# files
+ghp-suite-prod-client-with-key.ovpn
+config.py

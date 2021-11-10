@@ -1,3 +1,7 @@
+# files
+ghp-suite-prod-client-with-key.ovpn
+config.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,7 +131,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-# files
-ghp-suite-prod-client-with-key.ovpn
-config.py

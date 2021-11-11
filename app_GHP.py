@@ -5,6 +5,7 @@
 # libraries
 
 import streamlit as st
+from interfaces.Vendors import get_vendors_interface
 from interfaces.Venues import get_venues_interface
 from interfaces.Materials import get_materials_interface
 
@@ -21,7 +22,7 @@ st.title('GHP Data Visualization Project')
 
 menu = st.sidebar.radio(
     "",
-    ("Venues", "Materials", "Purchases", 'Vendor'),
+    ("Venues", "Materials", "Vendors", 'Purchases'),
 )
 st.sidebar.markdown('---')
 
@@ -31,8 +32,8 @@ if menu == 'Venues':
     get_venues_interface()
 elif menu == 'Materials':
     get_materials_interface()
-# elif menu == 'Variables de estudio':
-#     set_variables()
+elif menu == 'Vendors':
+     get_vendors_interface()
 # elif menu == 'Otras variables':
 #     set_otras_variables()
 # elif menu == 'Relaciones entre variables':

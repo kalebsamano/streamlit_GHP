@@ -10,8 +10,8 @@ import pandas as pd
 import numpy as np
 from ghp_suite_api import GHPSuiteApiConnector # Importing the library
 
-
 def get_venues_interface():
+    
     # coverage_stats = shared_state.coverage_stats
     # connection
     conn = GHPSuiteApiConnector(config.api_key)
@@ -23,8 +23,6 @@ def get_venues_interface():
     st.title('GHP Data  Project')
     pd.set_option('display.max_columns', None)
     venues_df = conn.get_venues_df()
-    materials_df = conn.get_procurement_material_catalog_df()
-    vendors_df = conn.get_procurement_vendor_catalog_df()
 
     # VENUES
     # display data
@@ -198,53 +196,6 @@ def get_venues_interface():
     room_occupation = pd.concat([MTYGA_rooms,room_occupation])
     # plot
     fig = px.line(room_occupation, x="date", y="rooms_occupied", title='Room occupation by hotel 2021', color='hotel')
-    # display
-    st.plotly_chart(fig)
-
-    # MATERIALS
-    with st.expander('Materials'):
-        st.write(materials_df)
-    # material units pie graph
-    counts = materials_df['unit_name'].value_counts().rename_axis('unit_name').reset_index(name='counts')
-    fig = px.pie(counts.head(10), values='counts', names='unit_name', title="Top 10 unidades de medición con más materiales", color_discrete_sequence = px.colors.sequential.Teal)
-    fig.update_traces(textposition='inside', textinfo='value+label')
-    # display
-    st.plotly_chart(fig)
-
-    # VENDORS
-    # display data
-    with st.expander('Vendors'):
-        st.write(vendors_df)
-    # providers map
-    vendors_map = vendors_df.groupby(['region_name'], as_index=False)['name'].count()
-    vendors_map["region_name"].replace({"Edo. de México": "México"}, inplace=True)
-    vendors_map.rename(columns={'region_name':'Estado', 'name':'Proveedores'}, inplace=True)
-    # get geo json
-    from urllib.request import urlopen
-    with urlopen('https://raw.githubusercontent.com/angelnmara/geojson/master/mexicoHigh.json') as response:
-        geoMex = json.load(response)
-    # plot
-    fig = px.choropleth(
-        data_frame=vendors_map, 
-        locations='Estado',
-        geojson=geoMex, 
-        featureidkey='properties.name',
-        color="Proveedores",
-        color_continuous_scale='Teal'
-        )
-    fig.update_geos(
-        showcountries=True, 
-        showcoastlines=True, 
-        showland=True, 
-        fitbounds='locations'
-        )
-    fig.update_layout(
-        title_text='Proveedores GHP',
-        font=dict(
-            family="Ubuntu",
-            size=18,
-            color='#7f7f7f')
-            )
     # display
     st.plotly_chart(fig)
 

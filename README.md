@@ -15,3 +15,7 @@ Libraries / packages needed are pandas, plotly and streamlit. Install them with 
 1. pipenv install pandas
 2. pipenv install plotly
 3. pipenv install streamlit
+
+### Streamlit deploy
+1. streamlit run .\app_GHP.py
+

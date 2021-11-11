@@ -25,7 +25,7 @@ menu = st.sidebar.radio(
 )
 st.sidebar.markdown('---')
 
-st.sidebar.write('Jose Gonzalez | Diego Kaleb | Rafa Velasco | Noviembre 2021')
+st.sidebar.write('Jose Gonzalez | Diego Samano | Rafa Velasco | Noviembre 2021')
 
 if menu == 'Venues':
     get_venues_interface()

@@ -18,9 +18,8 @@ def get_venues_interface():
     r = conn.test_connection()
     if r != '':
         sys.exit('Connection failed. ' + r)
-
-    st.header("Venues")
-    st.title('GHP Data  Project')
+    # page format
+    st.title('Venues')
     pd.set_option('display.max_columns', None)
     venues_df = conn.get_venues_df()
 

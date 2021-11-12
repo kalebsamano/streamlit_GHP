@@ -1,13 +1,9 @@
-import sys 
-import json
-import config 
+import sys
+import config
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from collections import defaultdict
-import pandas as pd
-import numpy as np
 from ghp_suite_api import GHPSuiteApiConnector # Importing the librar
 
 def get_materials_interface():
@@ -17,9 +13,8 @@ def get_materials_interface():
     r = conn.test_connection()
     if r != '':
         sys.exit('Connection failed. ' + r)
-
-    st.header("Materials")
-    st.title('GHP Data  Project')
+    # page format
+    st.title('Materials')
     pd.set_option('display.max_columns', None)
     materials_df = conn.get_procurement_material_catalog_df()
     # Plots

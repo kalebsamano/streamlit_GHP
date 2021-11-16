@@ -10,8 +10,8 @@ import pandas as pd
 import numpy as np
 from ghp_suite_api import GHPSuiteApiConnector # Importing the library
 
+#@st.cache(suppress_st_warning=True)
 def get_venues_interface():
-    
     # coverage_stats = shared_state.coverage_stats
     # connection
     conn = GHPSuiteApiConnector(config.api_key)
@@ -19,7 +19,7 @@ def get_venues_interface():
     if r != '':
         sys.exit('Connection failed. ' + r)
     # page format
-    st.title('Venues')
+    st.title('Hoteles')
     pd.set_option('display.max_columns', None)
     venues_df = conn.get_venues_df()
 

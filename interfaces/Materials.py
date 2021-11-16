@@ -3,9 +3,9 @@ import config
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
 from ghp_suite_api import GHPSuiteApiConnector # Importing the librar
 
+#@st.cache(suppress_st_warning=True)
 def get_materials_interface():
     # coverage_stats = shared_state.coverage_stats
     # connection

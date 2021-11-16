@@ -18,8 +18,7 @@ def get_vendors_interface():
     if r != '':
         sys.exit('Connection failed. ' + r)
     
-    st.header("Vendors")
-    st.title('GHP Data  Project')
+    st.title('Proveedores')
     pd.set_option('display.max_columns', None)
     vendors_df = conn.get_procurement_vendor_catalog_df()
     

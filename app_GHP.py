@@ -14,23 +14,23 @@ from interfaces.Purchases import get_purchases_interface
 st.sidebar.image('src/img/ghp.png', width=200)
 st.sidebar.header('Visualization')
 # title
-st.title('GHP Data Visualization Project')
+st.title('Abastecimiento general')
 # menu
 menu = st.sidebar.radio(
     "",
-    ("Venues", "Materials", "Vendors", 'Purchases'),
+    ("Hoteles", "Materiales", "Proveedores", 'Compras'),
 )
 # sidebar
 st.sidebar.markdown('---')
-st.sidebar.write('Jose Gonzalez | Diego Samano | Rafael Velasco | Noviembre 2021')
+st.sidebar.write('Jose Gonzalez | Diego Samano | Rafa Velasco | Noviembre 2021')
 # menu options
-if menu == 'Venues':
+if menu == 'Hoteles':
     get_venues_interface()
-elif menu == 'Materials':
+elif menu == 'Materiales':
     get_materials_interface()
-elif menu == 'Vendors':
+elif menu == 'Proveedores':
      get_vendors_interface()
-elif menu == 'Purchases':
+elif menu == 'Compras':
     get_purchases_interface()
 # elif menu == 'Relaciones entre variables':
 #     set_relations()

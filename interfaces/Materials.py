@@ -14,7 +14,7 @@ def get_materials_interface():
     if r != '':
         sys.exit('Connection failed. ' + r)
     # page format
-    st.title('Materials')
+    st.title('Materiales')
     pd.set_option('display.max_columns', None)
     materials_df = conn.get_procurement_material_catalog_df()
     # Plots

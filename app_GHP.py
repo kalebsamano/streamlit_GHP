@@ -12,7 +12,7 @@ from interfaces.Purchases import get_purchases_interface
 ############################################################################################
 #barside helpers
 st.sidebar.image('src/img/ghp.png', width=200)
-st.sidebar.header('Visualization')
+st.sidebar.header('Menu')
 # title
 st.title('Abastecimiento general')
 # menu

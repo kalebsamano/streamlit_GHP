@@ -92,7 +92,7 @@ def get_purchases_interface():
     # build figure
     figure = go.Figure(data)
     figure.update_layout(barmode = 'stack', title='Proporción de compras con tipo de proveedor')
-    figure.show()
+    st.plotly_chart(figure)
 
     # PLOT 2
     ## purchase data detail
@@ -116,8 +116,7 @@ def get_purchases_interface():
         data.append(go.Bar(name=str(x), x=cross_tab2.index, y=cross_tab2[x]))
     figure = go.Figure(data)
     figure.update_layout(barmode = 'stack')
-    figure.show()
-
+    st.plotly_chart(figure)
 
     
     

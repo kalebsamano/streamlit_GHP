@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import pandas as pd
-from frames import vendors
+from frames import vendors_df
 
 #@st.cache(suppress_st_warning=True)
 def get_vendors_interface():
@@ -11,14 +11,14 @@ def get_vendors_interface():
     st.title('Proveedores')
     pd.set_option('display.max_columns', None)
     
-    vendors_df = vendors()
+    vendors = vendors_df
     
     # display data
     with st.expander('Vendors'):
-        st.write(vendors_df)
+        st.write(vendors)
 
     # providers map
-    vendors_map = vendors_df.groupby(['region_name'], as_index=False)['name'].count()
+    vendors_map = vendors.groupby(['region_name'], as_index=False)['name'].count()
     vendors_map["region_name"].replace({"Edo. de México": "México"}, inplace=True)
     vendors_map.rename(columns={'region_name':'Estado', 'name':'Proveedores'}, inplace=True)
     # get geo json
@@ -41,7 +41,7 @@ def get_vendors_interface():
         fitbounds='locations'
         )
     fig.update_layout(
-        title_text='Proveedores GHP',
+        title='Proveedores GHP',
         font=dict(
             family="Ubuntu",
             size=18,

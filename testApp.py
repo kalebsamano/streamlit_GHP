@@ -24,7 +24,7 @@ st.sidebar.header('Menu')
 # menu
 menu = st.sidebar.radio(
     "",
-    ('Vendor Analysis'),
+    ('Materiales','Vendor Analysis'),
 )
 
 # sidebar
@@ -32,9 +32,9 @@ st.sidebar.markdown('---')
 st.sidebar.write('Jose Gonzalez | Diego Samano | Rafa Velasco | Nov 2021')
 
 # menu options
-#if menu == 'Materiales':
-    #get_materials_interface()
-if menu == 'Vendor Analysis':
+if menu == 'Materiales':
+    get_materials_interface()
+elif menu == 'Vendor Analysis':
     get_vendor_analysis_interface2()
 #elif menu == 'Proveedores':
      #get_vendors_interface()

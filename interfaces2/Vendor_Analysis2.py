@@ -29,7 +29,18 @@ def get_vendor_analysis_interface2():
     st.plotly_chart(fig)
 
     # PLOT 2
-    fig = go.Figure(data_plot2_df)
+    colors = {"Corporate": "#BF9F63", "Local": "#0C3140"}
+    data = []
+    for x in data_plot2_df.columns:
+        data.append(
+            go.Bar(
+                name=str(x), 
+                x=data_plot2_df.index, 
+                y=data_plot2_df[x], 
+                marker_color=colors[x]
+                )
+            )
+    fig = go.Figure(data)
     fig.update_layout(
         barmode = 'stack', 
         title='Proporción de compras por hotel y por tipo de proveedor', 
@@ -41,27 +52,33 @@ def get_vendor_analysis_interface2():
     fig = go.Figure()  
     fig.add_trace( 
         go.Indicator(
-        title = {'text': "Precio por unidad"},
-        mode = "number",
-        value = np.percentile(data_plot3_df['unit_price'], 95),
-        number = {'prefix': "$"},
-        domain = {'row': 1, 'column': 0},
-        title_font_color = '#BF9460'))
+            title = {'text': "Precio por unidad"},
+            mode = "number",
+            value = np.percentile(data_plot3_df['unit_price'], 95),
+            number = {'prefix': "$"},
+            domain = {'row': 1, 'column': 0},
+            title_font_color = '#BF9460'
+            )
+        )
     fig.add_trace( 
         go.Indicator(
-        title = {'text': "Importe total de compra"},
-        mode = "number",
-        value = np.percentile(data_plot3_df['net_value'], 95),
-        number = {'prefix': "$"},
-        domain = {'row': 1, 'column': 1},
-        title_font_color = '#EF7C20'))
+            title = {'text': "Importe total de compra"},
+            mode = "number",
+            value = np.percentile(data_plot3_df['net_value'], 95),
+            number = {'prefix': "$"},
+            domain = {'row': 1, 'column': 1},
+            title_font_color = '#EF7C20'
+            )
+        )
     fig.add_trace( 
         go.Indicator(
-        title = {'text': "Cantidad"},
-        mode = "number",
-        value = np.percentile(data_plot3_df['quantity'], 95),
-        domain = {'row': 1, 'column': 2},
-        title_font_color = '#0D0D0D'))
+            title = {'text': "Cantidad"},
+            mode = "number",
+            value = np.percentile(data_plot3_df['quantity'], 95),
+            domain = {'row': 1, 'column': 2},
+            title_font_color = '#0D0D0D'
+            )
+        )
     fig.update_layout(
         title = 'Percentil 95%: Límite en donde 95% de los datos son menores', 
         paper_bgcolor = "white", 

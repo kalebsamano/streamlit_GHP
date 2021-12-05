@@ -106,22 +106,10 @@ def purchase_data_detail():
 
     venues_name_df = v[['venue_code','name']]
     
-    df = pd.merge(
-        left = left_df, 
-        right = rightdf, 
-        how = 'left', 
-        left_on = 'material_id', 
-        right_on = 'id'
-        )
-    df.drop(
-        columns = ['id', 'group', 'unit_y', 'name', 'unit_name'], 
-        inplace = True
-        )
+    df = pd.merge(left = left_df, right = rightdf, how = 'left', left_on = 'material_id', right_on = 'id')
+    df.drop(columns = ['id', 'group', 'unit_y', 'name', 'unit_name'], inplace = True)
     df.rename(columns = {'unit_x': 'unit'}, inplace = True)
     df = pd.merge(left = df, right = venues_name_df, how = 'left', on = 'venue_code')
-    df.rename(columns = {'name': 'venue_name'}, inplace = True)
-    df = pd.merge(left = df, right = venues_name_df, how = 'left', on = 'venue_code')
-    
     df.rename(columns = {'name': 'venue_name'}, inplace = True)
     return(df)
 purchase_data_detail_df = purchase_data_detail()
@@ -156,7 +144,8 @@ purchase_materials_df = purchase_materials()
 
 # PLOT 1
 def data_plot1():
-    df = purchase_data_detail_df.groupby(['venue_name', 'vendor_negotiation_type']).size().unstack(fill_value=0).reset_index()
+    data = purchase_data_detail_df
+    df = data.groupby(['venue_name', 'vendor_negotiation_type']).size().unstack(fill_value=0).reset_index()
     df = pd.melt(
         df, 
         id_vars = 'venue_name', 
@@ -168,9 +157,10 @@ data_plot1_df = data_plot1()
 
 # PLOT 2
 def data_plot2():
+    data = purchase_data_df
     df = pd.crosstab(
-        index=purchase_data_df['venue_code'],
-        columns=purchase_data_df['vendor_negotiation_type'],
+        index=data['venue_code'],
+        columns=data['vendor_negotiation_type'],
         normalize="index"
         )
     return(df)
@@ -235,7 +225,9 @@ def local_groups_top10():
 local_groups_top10_df = local_groups_top10()
 
 def local():
-    df = local_groups_purchase_detail_df[local_groups_purchase_detail_df['group_name'].isin(local_groups_top10)]
+    data = local_groups_purchase_detail_df
+    top10 = local_groups_top10_df
+    df = data[data['group_name'].isin(top10)]
     return(df)
 local_df = local()
 
@@ -257,7 +249,9 @@ def corporate_groups_top10():
 corporate_groups_top10_df = corporate_groups_top10()
 
 def corporate():
-    df = corporate_groups_purchase_detail_df[corporate_groups_purchase_detail_df['group_name'].isin(corporate_groups_top10)]
+    data = corporate_groups_purchase_detail_df
+    top10 = corporate_groups_top10_df
+    df = data[data['group_name'].isin(top10)]
     return(df)
 corporate_df = corporate()
 

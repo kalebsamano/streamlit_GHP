@@ -114,34 +114,6 @@ def purchase_data_detail():
     return(df)
 purchase_data_detail_df = purchase_data_detail()
 
-# PURCHASE MATERIALS
-def purchase_materials():
-    
-    purchase_data = purchase_data_df
-    materials = materials_df
-    purchase_data_detail = pd.merge(
-        left = purchase_data, 
-        right = materials, 
-        how = 'left', 
-        left_on = 'material_id', 
-        right_on = 'id'
-        )
-
-    purchase_data_detail.drop(columns = ['id', 'group', 'unit_y', 'name', 'unit_name'], inplace = True)
-    purchase_data_detail.rename(columns = {'unit_x': 'unit'}, inplace = True)
-
-    group_name = purchase_data_detail['group_name'].value_counts().rename_axis('group_name').reset_index(name='counts')
-    group_name = group_name.head(10)
-    top10_groups = group_name['group_name'].unique()
-
-    groups_purchase_detail_df = purchase_data_detail[purchase_data_detail['group_name'].isin(top10_groups)]
-
-    df = pd.crosstab(index=groups_purchase_detail_df['venue_code'],
-                                columns=groups_purchase_detail_df['group_name'],
-                                normalize="index")
-    return(df)
-purchase_materials_df = purchase_materials()
-
 # PLOT 1
 def data_plot1():
     data = purchase_data_detail_df

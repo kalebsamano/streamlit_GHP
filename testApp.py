@@ -5,9 +5,9 @@
 # libraries
 import streamlit as st
 #from interfaces2.Vendors2 import get_vendors_interface
-from interfaces2.Materials2 import get_materials_interface
+from interfaces.Materials import get_materials_interface
 #from interfaces2.Purchases2 import get_purchases_interface
-from  interfaces2.Vendor_Analysis2 import get_vendor_analysis_interface2
+from  interfaces.Vendor_Analysis import get_vendor_analysis_interface2
 
 ############################################################################################
 #Barside

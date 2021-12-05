@@ -9,7 +9,7 @@ from frames import data_plot1_df, data_plot2_df, data_plot3_df, purchase_data_de
 def get_vendor_analysis_interface2():
 
     # page format
-    st.title('Analisis de vendedores')
+    st.title('Análisis de vendedores')
     pd.set_option('display.max_columns', None)
 
     # PLOT 1
@@ -19,7 +19,13 @@ def get_vendor_analysis_interface2():
         x="count", 
         color="vendor_negotiation_type", 
         template = 'plotly_white', 
-        color_discrete_map={"Corporate": "#BF9F63", "Local": "#0C3140"})
+        color_discrete_map={"Corporate": "#BF9F63", "Local": "#0C3140"},
+        labels={
+                     "venue_name": "Hotel",
+                     "count": "Compras mxn",
+                     "vendor_negotiation_type" : "Tipo de proveedor"
+                 }
+        )
     fig.update_traces(marker_size=10)
     fig.update_layout(
         title = 'Número de compras con tipo de proveedor', 
@@ -180,6 +186,10 @@ def get_vendor_analysis_interface2():
         y="Promedio",
         color='vendor_negotiation_type', 
         barmode='group',
+        labels={
+                     "group_name": "Grupo",
+                     "vendor_negotiation_type" : "Tipo de proveedor"
+        },
         color_discrete_sequence = ["#BF9F63", "#0C3140"],
         height=400
         )

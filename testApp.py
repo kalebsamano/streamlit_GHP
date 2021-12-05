@@ -29,7 +29,7 @@ menu = st.sidebar.radio(
 
 # sidebar
 st.sidebar.markdown('---')
-st.sidebar.write('Jose Gonzalez | Diego Samano | Rafa Velasco | Nov 2021')
+st.sidebar.write('Jose Gonzalez | Diego Samano | Rafa Velasco | Diciembre 2021')
 
 # menu options
 if menu == 'Materiales':

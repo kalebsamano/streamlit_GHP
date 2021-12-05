@@ -26,8 +26,8 @@ st.sidebar.write('Jose Gonzalez | Diego Samano | Rafa Velasco | Noviembre 2021')
 # menu options
 if menu == 'Hoteles':
     get_venues_interface()
-elif menu == 'Materiales':
-    get_materials_interface()
+# elif menu == 'Materiales':
+#     get_materials_interface()
 elif menu == 'Proveedores':
      get_vendors_interface()
 elif menu == 'Compras':

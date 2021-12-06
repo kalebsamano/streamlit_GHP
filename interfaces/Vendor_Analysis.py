@@ -253,7 +253,7 @@ def get_vendor_analysis_interface2():
                     ),
                 cells=dict(
                     values=[
-                        data_plot8_df.venue_code, 
+                        #data_plot8_df.venue_code, 
                         data_plot8_df.group_name, 
                         data_plot8_df.corporate_unitprice_mean, 
                         data_plot8_df.local_unitprice_mean, 

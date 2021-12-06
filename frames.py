@@ -232,80 +232,105 @@ def data_plot5():
     return(df)
 data_plot5_df = data_plot5()
 
+# PLOT 6
 def top10groups_local_corporate_data():
     d = pd.crosstab(index=joint_df['vendor_negotiation_type'],columns=joint_df['group_name'],normalize="index")
     df = purchase_data_detail_df[purchase_data_detail_df['group_name'].isin(d.columns)]
     return(df)
 top10groups_local_corporate_data_df = top10groups_local_corporate_data()
 
-# PLOT 6
 def data_plot6():
-    
-    corporate_groups = top10groups_local_corporate_data_df[
-        top10groups_local_corporate_data_df['vendor_negotiation_type'] == 'Corporate'
-        ]
-    local_groups = top10groups_local_corporate_data_df[
-        top10groups_local_corporate_data_df['vendor_negotiation_type'] == 'Local'
-        ]
+
+    t = top10groups_local_corporate_data_df
+    p = purchase_data_detail_df
+
+    corporate_data = p[p['vendor_negotiation_type'] == 'Corporate']
+    local_data = p[p['vendor_negotiation_type'] == 'Local']
+
+    a_set = set(corporate_data['material_description'].unique())
+    b_set = set(local_data['material_description'].unique())
+
+    a = (a_set & b_set)
+    common_items = list(a)
+
+    t = t[t['material_description'].isin(common_items)]
+    t.drop_duplicates(subset = ['material_description', 'vendor_negotiation_type'], inplace = True)
+
+    corporate_groups = t[t['vendor_negotiation_type'] == 'Corporate']
+    local_groups = t[t['vendor_negotiation_type'] == 'Local']
+
     corporate_groups_mean = corporate_groups['unit_price'].groupby(corporate_groups['group_name']).agg('mean').rename_axis('group_name').reset_index(name = 'Promedio')
     corporate_groups_mean['vendor_negotiation_type'] = 'Corporate'
     local_groups_mean = local_groups['unit_price'].groupby(local_groups['group_name']).agg('mean').rename_axis('group_name').reset_index(name = 'Promedio')
     local_groups_mean['vendor_negotiation_type'] = 'Local'
     df = pd.concat([corporate_groups_mean, local_groups_mean])
+
     return(df)
 data_plot6_df = data_plot6()
 
 # PLOT 7
 def data_plot7():
 
+    cross_tab2 = data_plot5_df
+    d = purchase_data_detail_df
+
+    t = d[d['group_name'].isin(cross_tab2.columns)]
+
     df = pd.crosstab(
-        index=top10groups_local_corporate_data_df['venue_code'],
-        columns=top10groups_local_corporate_data_df['group_name'],
+        index=t['venue_code'],
+        columns=t['group_name'],
         normalize="index"
         )
     return(df)
 data_plot7_df = data_plot7()
 
 # PLOT 8
+def common_items():
+    
+    p = purchase_data_detail_df
+    
+    corporate_data = p[p['vendor_negotiation_type'] == 'Corporate']
+    local_data = p[p['vendor_negotiation_type'] == 'Local']
+
+    a_set = set(corporate_data['material_description'].unique())
+    b_set = set(local_data['material_description'].unique())
+
+    a = (a_set & b_set)
+    df = list(a)
+    return(df)
+common_items_df = common_items()
+
 def data_plot8():
+    c = common_items_df
+    t = top10groups_local_corporate_data_df
+    p = purchase_data_detail_df
+
+    t = t[t['material_description'].isin(c)]
+    t.drop_duplicates(subset = ['material_description', 'vendor_negotiation_type'], inplace = True)
 
     table_data = []
-    venuesdf = venues_df
-    venues_activos = venuesdf[venuesdf['status_name'] == 'Activo']
-    
-    for venue_code in venues_activos['venue_code'].unique():
-        venue_df = top10groups_local_corporate_data_df[top10groups_local_corporate_data_df['venue_code'].isin([venue_code])]
-        for group_name in data_plot5_df.columns:
-            venue_info = []
-            group_df = venue_df[venue_df['group_name'] == group_name]
-            corporate_groups = group_df[group_df['vendor_negotiation_type'] == 'Corporate']
-            local_groups = group_df[group_df['vendor_negotiation_type'] == 'Local']
-            venue_info.append(venue_code)
-            venue_info.append(group_name)
-            venue_info.append(corporate_groups['unit_price'].mean())
-            venue_info.append(local_groups['unit_price'].mean())
-            table_data.append(venue_info) 
+
+    for group_name in p['group_name'].unique():
+        group_info = []
+        group_df = p[p['group_name'] == group_name]
+        corporate_groups = group_df[group_df['vendor_negotiation_type'] == 'Corporate']
+        local_groups = group_df[group_df['vendor_negotiation_type'] == 'Local']
+        group_info.append(group_name)
+        group_info.append(corporate_groups['unit_price'].mean())
+        group_info.append(local_groups['unit_price'].mean())
+        table_data.append(group_info)
+
     table_df = pd.DataFrame(
         table_data, 
-        columns = [
-            'venue_code', 
-            'group_name', 
-            'corporate_unitprice_mean', 
-            'local_unitprice_mean'
-            ]
+        columns = ['group_name', 'corporate_unitprice_mean', 'local_unitprice_mean']
         )
     table_df.dropna(how = 'any', inplace = True)
-    table_df['corporateIsHigher'] = np.where(
-        table_df['corporate_unitprice_mean']>table_df['local_unitprice_mean'], 'Yes', 'No'
-        )
+    table_df['corporateIsHigher'] = np.where(table_df['corporate_unitprice_mean']>table_df['local_unitprice_mean'], 'Yes', 'No')
     table_df['corporate_unitprice_mean'] = table_df['corporate_unitprice_mean'].round(decimals = 2)
     table_df['local_unitprice_mean'] = table_df['local_unitprice_mean'].round(decimals = 2)
     table_df = table_df[table_df['corporateIsHigher']== 'Yes']
-    table_df.sort_values(
-        by = 'corporate_unitprice_mean',
-        ascending = True, 
-        inplace = True
-        )
+    table_df.sort_values(by = 'corporate_unitprice_mean',ascending = True, inplace = True)
+
     return(table_df)
 data_plot8_df = data_plot8()
 

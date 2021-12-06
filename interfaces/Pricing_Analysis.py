@@ -46,8 +46,8 @@ def get_pricing_analysis_interface():
         }
         )
     fig.update_layout(
-        plot_bgcolor = 'white'
-        # width = 1200, 
+        plot_bgcolor = 'white',
+        width = 800
         # height = 500
         )
     st.plotly_chart(fig)
@@ -69,8 +69,8 @@ def get_pricing_analysis_interface():
         }
         )
     fig.update_layout(
-        plot_bgcolor = 'white'
-        # width = 1200, 
+        plot_bgcolor = 'white',
+        width = 800
         # height = 500
         )
     st.plotly_chart(fig)
@@ -185,9 +185,9 @@ def get_pricing_analysis_interface():
             )
         )
     fig.update_layout(
-        plot_bgcolor = 'white'
-        # width = 1200, 
-        # height = 500
+        plot_bgcolor = 'white',
+        width = 1200, 
+        height = 500
         )
 
 if __name__ == "__main__":

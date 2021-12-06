@@ -50,7 +50,8 @@ def get_vendor_analysis_interface2():
     fig = go.Figure(data)
     fig.update_layout(
         barmode = 'stack',
-        plot_bgcolor = 'white'
+        plot_bgcolor = 'white',
+        width=1000
         )
     st.plotly_chart(fig)
 

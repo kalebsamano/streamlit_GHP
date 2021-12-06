@@ -184,11 +184,8 @@ def get_pricing_analysis_interface():
             line=dict(color="gray", width=1, dash="dash")
             )
         )
-    fig.update_layout(
-        plot_bgcolor = 'white',
-        width = 1200, 
-        height = 500
-        )
+    fig.update_layout(plot_bgcolor = 'white')
+    st.plotly_chart(fig)
 
 if __name__ == "__main__":
     get_pricing_analysis_interface()

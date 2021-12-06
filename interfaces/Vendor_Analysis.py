@@ -4,7 +4,7 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from frames import data_plot1_df, data_plot2_df, data_plot3_df, purchase_data_detail_unit98, purchase_data_detail_net98, purchase_data_detail_quant98, data_plot5_df, data_plot6_df, data_plot7_df, data_plot8_df
+# from frames import data_plot1_df, data_plot2_df, data_plot3_df, purchase_data_detail_unit98, purchase_data_detail_net98, purchase_data_detail_quant98, data_plot5_df, data_plot6_df, data_plot7_df, data_plot8_df
 
 def get_vendor_analysis_interface2():
 
@@ -13,6 +13,7 @@ def get_vendor_analysis_interface2():
     pd.set_option('display.max_columns', None)
 
     # PLOT 1
+    st.subheader('Número de compras con tipo de proveedor')
     fig = px.scatter(
         data_plot1_df, 
         y="venue_name", 
@@ -27,14 +28,14 @@ def get_vendor_analysis_interface2():
                  }
         )
     fig.update_traces(marker_size=10)
-    fig.update_layout(
-        title = 'Número de compras con tipo de proveedor', 
-        height = 800, 
-        width = 1200
-        )
+    # fig.update_layout(
+    #     height = 800, 
+    #     width = 1200
+    #     )
     st.plotly_chart(fig)
 
     # PLOT 2
+    st.subheader('Proporción de compras por hotel y por tipo de proveedor')
     colors = {"Corporate": "#BF9F63", "Local": "#0C3140"}
     data = []
     for x in data_plot2_df.columns:
@@ -48,13 +49,13 @@ def get_vendor_analysis_interface2():
             )
     fig = go.Figure(data)
     fig.update_layout(
-        barmode = 'stack', 
-        title='Proporción de compras por hotel y por tipo de proveedor', 
+        barmode = 'stack',
         plot_bgcolor = 'white'
         )
     st.plotly_chart(fig)
 
     # PLOT 3
+    st.subheader('Percentil 95%: Límite en donde 95% de los datos son menores')
     fig = go.Figure()  
     fig.add_trace( 
         go.Indicator(
@@ -86,13 +87,14 @@ def get_vendor_analysis_interface2():
             )
         )
     fig.update_layout(
-        title = 'Percentil 95%: Límite en donde 95% de los datos son menores', 
         paper_bgcolor = "white", 
         grid = {'rows': 1, 'columns': 3}
         )
     st.plotly_chart(fig)
 
     # PLOT 4
+
+    st.subheader('Comparación de variables por tipo de proveedor')
     fig = make_subplots(
         rows=1, 
         cols=3, 
@@ -128,13 +130,13 @@ def get_vendor_analysis_interface2():
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=True, gridwidth=0.1, gridcolor='gainsboro')
     fig.update_layout(
-        title_text="Comparación de variables por tipo de proveedor", 
         height = 700, 
         plot_bgcolor='white'
         )
     st.plotly_chart(fig)
 
     # PLOT 5
+    st.subheader('Porcentaje de compras de grupo por tipo de proveedor')
     colors = {
         'Fruits & Vegetables':'#bfa48a', 
         'Cleaning accesories':'#1b1715', 
@@ -170,16 +172,14 @@ def get_vendor_analysis_interface2():
         gridwidth=0.1, 
         gridcolor='gainsboro'
         )
-    fig.update_layout(
-        height = 600, 
-        width = 1000, 
+    fig.update_layout( 
         barmode = 'stack', 
-        plot_bgcolor='white', 
-        title_text="Porcentaje de compras de grupo por tipo de proveedor"
+        plot_bgcolor='white'
         )
     st.plotly_chart(fig)
 
     # PLOT 6
+    st.subheader('Promedio de precio unitario por grupo')
     fig = px.bar(
         data_plot6_df, 
         x="group_name", 
@@ -199,12 +199,12 @@ def get_vendor_analysis_interface2():
         gridcolor='gainsboro'
         )
     fig.update_layout(
-        title = 'Promedio de precio unitario por grupo', 
         plot_bgcolor = 'white'
         )
     st.plotly_chart(fig)
 
     # PLOT 7
+    st.subheader('Distribución grupo por hotel')
     data = []
     colors = {
         'Fruits & Vegetables':'#bfa48a', 
@@ -241,6 +241,7 @@ def get_vendor_analysis_interface2():
     st.plotly_chart(fig)
 
     # PLOT 8
+    # st.subheader('Distribución grupo por hotel')
     fig = go.Figure(
         data=[
             go.Table(

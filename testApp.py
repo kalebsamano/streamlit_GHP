@@ -12,14 +12,11 @@ from  interfaces.Vendor_Analysis import get_vendor_analysis_interface2
 ############################################################################################
 #Barside
 ############################################################################################
-st.set_page_config(layout="wide")
+st.set_page_config(layout="centered", page_title='PRISMA')
 
 #barside helpers
 st.sidebar.image('src/img/ghp.png', width=200)
 st.sidebar.header('Menu')
-
-# title
-#st.title('Abastecimiento general')
 
 # menu
 menu = st.sidebar.radio(

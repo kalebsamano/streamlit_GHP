@@ -171,7 +171,12 @@ def get_pricing_analysis_interface():
         x = 'venue_code', 
         y = 'quantity', 
         color = 'material_description', 
-        color_discrete_sequence = ['#aba676','#d98d10']
+        color_discrete_sequence = ['#aba676','#d98d10'],
+        labels={
+                "quantity": "Número mantenimientos",
+                "venue_code": "Hotel",
+                "material_description": "Tipo mantenimientos"
+        }
         )
     y = np.arange(0,comparation_df['quantity'].mean(),1)
     fig.add_shape(

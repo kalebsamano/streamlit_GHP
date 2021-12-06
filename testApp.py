@@ -33,7 +33,3 @@ if menu == 'Análisis proveedores':
     get_vendor_analysis_interface2()
 elif menu == 'Análisis precio':
     get_pricing_analysis_interface()
-#elif menu == 'Proveedores':
-     #get_vendors_interface()
-#elif menu == 'Compras':
-    #get_purchases_interface()

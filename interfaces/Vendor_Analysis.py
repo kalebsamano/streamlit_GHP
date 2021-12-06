@@ -187,6 +187,7 @@ def get_vendor_analysis_interface2():
         color='vendor_negotiation_type', 
         barmode='group',
         labels={
+                    "Promedio": "Precio unitario promedio",
                      "group_name": "Grupo",
                      "vendor_negotiation_type" : "Tipo de proveedor"
         },
@@ -204,7 +205,7 @@ def get_vendor_analysis_interface2():
     st.plotly_chart(fig)
 
     # PLOT 7
-    st.subheader('Distribución grupo por hotel')
+    st.subheader('Distribución de categorías por producto')
     data = []
     colors = {
         'Fruits & Vegetables':'#bfa48a', 
@@ -241,7 +242,7 @@ def get_vendor_analysis_interface2():
     st.plotly_chart(fig)
 
     # PLOT 8
-    # st.subheader('Distribución grupo por hotel')
+    st.subheader('Comparación de precio promedio por tipo de proveedor')
     fig = go.Figure(
         data=[
             go.Table(

@@ -16,12 +16,12 @@ st.set_page_config(layout="centered", page_title='PRISMA')
 
 #barside helpers
 st.sidebar.image('src/img/ghp.png', width=200)
-st.sidebar.header('Menu')
+st.sidebar.header('Menú')
 
 # menu
 menu = st.sidebar.radio(
     "",
-    ('Vendor Analysis', 'Pricing Analysis'),
+    ('Análisis proveedores', 'Análisis precio'),
 )
 
 # sidebar
@@ -29,9 +29,9 @@ st.sidebar.markdown('---')
 st.sidebar.write('Jose Gonzalez | Diego Samano | Rafa Velasco | Diciembre 2021')
 
 # menu options
-if menu == 'Vendor Analysis':
+if menu == 'Análisis proveedores':
     get_vendor_analysis_interface2()
-elif menu == 'Pricing Analysis':
+elif menu == 'Análisis precio':
     get_pricing_analysis_interface()
 #elif menu == 'Proveedores':
      #get_vendors_interface()

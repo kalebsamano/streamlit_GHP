@@ -4,7 +4,7 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-# from frames import data_plot1_df, data_plot2_df, data_plot3_df, purchase_data_detail_unit98, purchase_data_detail_net98, purchase_data_detail_quant98, data_plot5_df, data_plot6_df, data_plot7_df, data_plot8_df
+from frames import data_plot1_df, data_plot2_df, data_plot3_df, purchase_data_detail_unit98, purchase_data_detail_net98, purchase_data_detail_quant98, data_plot5_df, data_plot6_df, data_plot7_df, data_plot8_df
 
 def get_vendor_analysis_interface2():
 
